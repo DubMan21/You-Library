@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+  {{ parent() }} - Nos Films
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    {{ form_start(form) }}
+      <div class="row mt-4">
+        <div class="col-sm-4 col-md-2">
+          <div class="form-group">
+            {{ form_widget(form.category) }}
+          </div>
+        </div>
+        <div class="col-sm-8 col-md-4">
+          <div class="form-group">
+            {{ form_widget(form.search) }}
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-2">
+          <div class="form-group">
+            {{ form_widget(form.minPrice) }}
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-2">
+          <div class="form-group">
+            {{ form_widget(form.maxPrice) }}
+          </div>
+        </div>
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-dark">Rechercher</button>
+        </div>
+      </div>
+    {{ form_end(form) }}   
+    <div class="row mt-4">
+      {% for book in books %}
+        {% include "components/book.html.twig" %}
+      {% endfor %}
+    </div>
+    {% if previous >= 0 %}
+      <a 
+        href="{{ path('books', { offset: previous }) }}" class="btn btn-dark">Précédente</a>
+    {% endif %}
+    {% if next < books|length %}
+      <a href="{{ path('books', { offset: next }) }}" class="btn btn-dark float-right">Prochaine</a>
+    {% endif %}
+  </div>
+{% endblock %}

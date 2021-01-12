@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Entity\BookSearch;
+use App\Form\BookSearchType;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,13 +43,18 @@ class MainController extends AbstractController {
      * @Route("/books", name="books")
      */
     public function books(Request $request){
-      $offset = max(0, $request->query->getInt('offset', 0));
-      $paginator = $this->bookRepository->getBookPaginator($offset);
+      $bookSearch = new BookSearch();
+      $form = $this->createForm(BookSearchType::class, $bookSearch);
+      $form->handleRequest($request);
 
-      return $this->render('main/list.html.twig',  [
+      $offset = max(0, $request->query->getInt('offset', 0));
+      $paginator = $this->bookRepository->getBookPaginator($bookSearch, $offset);
+
+      return $this->render('main/books.html.twig',  [
         'books' => $paginator,
         'previous' => $offset - BookRepository::PAGINATOR_PER_PAGE,
         'next' => min(count($paginator), $offset + BookRepository::PAGINATOR_PER_PAGE),
+        'form' => $form->createView()
       ]);
     }
 
