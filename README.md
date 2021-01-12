@@ -1,4 +1,7 @@
 # You Library
+
+## Set up the project
+
 * Clone the project
 
 ```
@@ -46,3 +49,11 @@ Then move in.
 ```
 
 You can access it on [https://127.0.0.1:8000](https://127.0.0.1:8000)
+
+## Use
+
+* Create a user with a symfony command. You must fill in the user's `email` and `password`. You can create an admin user instead of a regular user with the `--admin` flag.
+
+```
+  php bin/console app:create-user email password --admin
+```
