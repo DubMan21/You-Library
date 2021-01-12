@@ -4,7 +4,13 @@
     background: linear-gradient(to right bottom, #4A6AAA, #59E0D0);
     color: #ffffff;
     min-height: 100vh;
+
+    h1 {
+        text-align: center;
+    }
 }
-h1 {
-    text-align: center;
+.book-card {
+    color: #2D2D2D;
+    height: 100%;
 }
+
