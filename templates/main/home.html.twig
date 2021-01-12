@@ -12,7 +12,7 @@
       {% for book in books %}
         {% include "components/book.html.twig" %}
       {% endfor %}
-    </div>    
-    <a href="#" class="btn btn-dark mt-4 float-right">Voir tous nos livres</a>
+    </div>
+    <a href="{{ path('movies') }}" class="btn btn-dark mt-4 float-right">Voir tous nos livres</a>
   </div>
 {% endblock %}

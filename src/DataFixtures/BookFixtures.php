@@ -72,12 +72,21 @@ class BookFixtures extends Fixture implements DependentFixtureInterface
         $book6->setTitle("Allez c'est bientôt fini");
         $book6->setSlug('allez-c-est-bientot-fini');
         $book6->setIsbn('6669892330');
-        $book6->setResume("On continu quoi...");
+        $book6->setResume("On continue d'écrire des fixtures.");
         $book6->setPrice(88);
         $book6->setEditor($this->getReference(EditorFixtures::MILAN));
         $book6->setAuthor($this->getReference(AuthorFixtures::CAMUS));
         $book6->addCategory($this->getReference(CategoryFixtures::NOUVELLE));
         $book6->addCategory($this->getReference(CategoryFixtures::BIOGRAPHIE));
+
+        $book7 = new Book();
+        $book7->setTitle("Un dernier pour la route");
+        $book7->setSlug('un-dernier-pour-la-route');
+        $book7->setIsbn('7779892330');
+        $book7->setResume("Le dernier ! Enfin !");
+        $book7->setPrice(28);
+        $book7->setAuthor($this->getReference(AuthorFixtures::FLAUBERT));
+        $book7->addCategory($this->getReference(CategoryFixtures::BIOGRAPHIE));
 
         $manager->persist($book1);
         $manager->persist($book2);
@@ -85,6 +94,7 @@ class BookFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($book4);
         $manager->persist($book5);
         $manager->persist($book6);
+        $manager->persist($book7);
 
         $manager->flush();
     }

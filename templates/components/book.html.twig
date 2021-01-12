@@ -1,4 +1,4 @@
-<div class="col-sm-6 col-lg-4 mt-4">
+<div class="col-sm-6 col-lg-4 mb-4">
   <div class="card book-card">
     <div class="card-body">
       <h5 class="card-title">{{ book.title }}</h5>
@@ -17,7 +17,9 @@
       </li>
     </ul>
     <div class="card-body">
-      {# <a href="#" class="card-link">Like</a> #}
+      {# {% if app.user and not is_granted('ROLE_ADMIN')  %}
+        <a href="#" class="card-link">Like</a>
+      {% endif %} #}
       <span class="float-right">isbn : {{ book.isbn }}</span>
     </div>
   </div>
