@@ -8,6 +8,14 @@ use Doctrine\Persistence\ObjectManager;
 
 class CategoryFixtures extends Fixture
 {
+
+    public const ROMAN = 'roman';
+    public const BIOGRAPHIE = 'biographie';
+    public const NOUVELLE = 'nouvelle';
+    public const CONTE = 'conte';
+    public const FABLE = 'fable';
+    public const ESSAI = 'essai';
+
     public function load(ObjectManager $manager)
     {
         $category1 = new Category();
@@ -40,6 +48,13 @@ class CategoryFixtures extends Fixture
         $manager->persist($category4);
         $manager->persist($category5);
         $manager->persist($category6);
+
+        $this->addReference(self::ROMAN, $category1);
+        $this->addReference(self::BIOGRAPHIE, $category2);
+        $this->addReference(self::NOUVELLE, $category3);
+        $this->addReference(self::CONTE, $category4);
+        $this->addReference(self::FABLE, $category5);
+        $this->addReference(self::ESSAI, $category6);
 
         $manager->flush();
     }

@@ -9,6 +9,11 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class AuthorFixtures extends Fixture
 {
+
+    public const CAMUS = 'camus';
+    public const FLAUBERT = 'flaubert';
+    public const MAUPASSANT = 'maupassant';
+
     public function load(ObjectManager $manager)
     {
         $author1 = new Author();
@@ -29,6 +34,10 @@ class AuthorFixtures extends Fixture
         $manager->persist($author1);
         $manager->persist($author2);
         $manager->persist($author3);
+
+        $this->addReference(self::CAMUS, $author1);
+        $this->addReference(self::FLAUBERT, $author2);
+        $this->addReference(self::MAUPASSANT, $author3);
 
         $manager->flush();
     }
