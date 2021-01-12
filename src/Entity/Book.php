@@ -60,6 +60,7 @@ class Book
 
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="books")
+     * @Assert\Count(min="1")
      */
     private $categories;
 
