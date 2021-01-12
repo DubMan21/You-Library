@@ -18,6 +18,22 @@ Then move in.
   yarn install
 ```
 
+* Create a .env.local file with the content as the .env file. Define the url of your database by uncommenting the corresponding line and fill it with your values 
+
+```
+  DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7"
+```
+
+* Create the database with doctrine
+```
+  php bin/console doctrine:database:create
+```
+
+* Migrate the database
+```
+  php bin/console doctrine:migrations:migrate
+```
+
 * Start the server
 ```
   symfony server:start
