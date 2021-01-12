@@ -13,10 +13,10 @@
     </div>
     {% if previous >= 0 %}
       <a 
-        href="{{ path('movies', { offset: previous }) }}" class="btn btn-dark">Précédente</a>
+        href="{{ path('books', { offset: previous }) }}" class="btn btn-dark">Précédente</a>
     {% endif %}
     {% if next < books|length %}
-      <a href="{{ path('movies', { offset: next }) }}" class="btn btn-dark float-right">Prochaine</a>
+      <a href="{{ path('books', { offset: next }) }}" class="btn btn-dark float-right">Prochaine</a>
     {% endif %}
   </div>
 {% endblock %}

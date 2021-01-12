@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Book;
 use App\Repository\BookRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,9 +16,15 @@ class MainController extends AbstractController {
      */
     private $bookRepository;
 
-    public function __construct(BookRepository $bookRepository)
+    /**
+     * @param EntityManagerInterface $em
+     */
+    private $em;
+
+    public function __construct(BookRepository $bookRepository, EntityManagerInterface $em)
     {
       $this->bookRepository = $bookRepository;
+      $this->em = $em;
     }
 
     /**
@@ -30,9 +38,9 @@ class MainController extends AbstractController {
     }
 
     /**
-     * @Route("/movies", name="movies")
+     * @Route("/books", name="books")
      */
-    public function movies(Request $request){
+    public function books(Request $request){
       $offset = max(0, $request->query->getInt('offset', 0));
       $paginator = $this->bookRepository->getBookPaginator($offset);
 
@@ -40,6 +48,36 @@ class MainController extends AbstractController {
         'books' => $paginator,
         'previous' => $offset - BookRepository::PAGINATOR_PER_PAGE,
         'next' => min(count($paginator), $offset + BookRepository::PAGINATOR_PER_PAGE),
+      ]);
+    }
+
+    /**
+     * @Route("/like/{id}", name="like")
+     */
+    public function like(Book $book, Request $request){
+      $user = $this->getUser();
+      $user->addLike($book);
+      $this->em->flush();
+      return $this->redirect($request->headers->get('referer'));
+    }
+
+    /**
+     * @Route("/unlike/{id}", name="unlike")
+     */
+    public function unlike(Book $book, Request $request){
+      $user = $this->getUser();
+      $user->removeLike($book);
+      $this->em->flush();
+      return $this->redirect($request->headers->get('referer'));
+    }
+
+    /**
+     * @Route("likes", name="likes")
+     */
+    public function likes(){
+      $books = $this->getUser()->getLikes();
+      return $this->render('main/likes.html.twig', [
+        'books' => $books
       ]);
     }
   

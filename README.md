@@ -63,4 +63,4 @@ You can access it on [https://127.0.0.1:8000](https://127.0.0.1:8000)
   php bin/console app:create-user email password --admin
 ```
 
-* Once you are logged in with an administrator user, you can access the `/ admin` route to administer the content.
+* Once you are logged in with an administrator user, you can access the `/admin` route to administer the content.

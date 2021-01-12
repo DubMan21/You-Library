@@ -17,9 +17,13 @@
       </li>
     </ul>
     <div class="card-body">
-      {# {% if app.user and not is_granted('ROLE_ADMIN')  %}
-        <a href="#" class="card-link">Like</a>
-      {% endif %} #}
+      {% if app.user %}
+        {% if book in app.user.likes %}
+          <a href="{{ path('unlike', {id: book.id}) }}" class="card-link">Unlike</a>
+        {% else %}
+          <a href="{{ path('like', {id: book.id}) }}" class="card-link">Like</a>
+        {% endif %}
+      {% endif %}
       <span class="float-right">isbn : {{ book.isbn }}</span>
     </div>
   </div>

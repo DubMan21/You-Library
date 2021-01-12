@@ -1,18 +1,16 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-  {{ parent() }} - Accueil
+  {{ parent() }} - Vos favoris
 {% endblock %}
 
 {% block body %}
   <div class="container">
-    <h1 class="mt-5">Bienvenu sur You Library !</h1>
-    <p>Vous pouvez retrouver ici nos derniers livres</p>
+    <h1 class="mt-5">Voici les livres favoris</h1>
     <div class="row mt-4">
       {% for book in books %}
         {% include "components/book.html.twig" %}
       {% endfor %}
     </div>
-    <a href="{{ path('books') }}" class="btn btn-dark mt-4 float-right">Voir tous nos livres</a>
   </div>
 {% endblock %}
