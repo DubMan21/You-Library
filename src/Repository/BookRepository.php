@@ -3,9 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Book;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+use App\Entity\BookSearch;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Book|null find($id, $lockMode = null, $lockVersion = null)
@@ -38,14 +39,44 @@ class BookRepository extends ServiceEntityRepository
     /**
      * @return Book[] Returns an array of Book objects
     */
-    public function getBookPaginator( int $offset)
+    public function getBookPaginator(BookSearch $booksearch, int $offset)
     {
-        return new Paginator($this->createQueryBuilder('b')
+        $query = $this->createQueryBuilder('b')
             ->orderBy('b.id', 'DESC')
+        ;
+
+        if($booksearch->getMinPrice()) {
+            $query = $query
+                ->andWhere('b.price >= :minprice')
+                ->setParameter('minprice', $booksearch->getMinPrice())
+            ;
+        }
+        if($booksearch->getMaxPrice()) {
+            $query = $query
+                ->andWhere('b.price <= :maxprice')
+                ->setParameter('maxprice', $booksearch->getMaxPrice())
+            ;
+        }
+        if($booksearch->getSearch()) {
+            $query = $query
+                ->andWhere('b.title LIKE :search OR b.isbn LIKE :search')
+                ->setParameter('search', '%' . $booksearch->getSearch() . '%')
+            ;
+        }
+        if($booksearch->getCategory()) {
+            $query = $query
+                ->andWhere(':category MEMBER OF b.categories')
+                ->setParameter('category', $booksearch->getCategory())
+            ;
+        }
+
+        $query = $query
             ->setMaxResults(self::PAGINATOR_PER_PAGE)
             ->setFirstResult($offset)
             ->getQuery()
-        );
+        ;
+
+        return new Paginator($query);
     }
 
     /*
