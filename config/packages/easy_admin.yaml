@@ -1,0 +1,33 @@
+easy_admin:
+    site_name: You Library Administration
+
+    design:
+        menu:
+            - { route: 'home', label: 'Back to website', icon: 'home' }
+            - { entity: 'Book', label: 'Book', icon: 'book' }
+            - { entity: 'Editor', label: 'Editor', icon: 'newspaper' }
+            - { entity: 'Author', label: 'Author', icon: 'feather-alt' }
+            - { entity: 'Category', label: 'Category', icon: 'folder-open' }
+
+    entities:
+        Book:
+            class: App\Entity\Book
+        Editor:
+            class: App\Entity\Editor
+            edit:
+                fields:
+                    - { property: 'name'}
+                    - { property: 'foundationYear'}
+        Author:
+            class: App\Entity\Author
+            edit:
+                fields:
+                    - { property: 'firstname'}
+                    - { property: 'lastname'}
+                    - { property: 'birthday'}
+        Category:
+            class: App\Entity\Category
+            edit:
+                fields:
+                    - { property: 'name'}
+                    - { property: 'slug'}
