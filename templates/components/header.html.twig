@@ -17,7 +17,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
             {% if is_granted('ROLE_ADMIN')  %}
-              <a class="dropdown-item" href="#">Administration</a>
+              <a class="dropdown-item" href="{{ path('easyadmin') }}">Administration</a>
             {% else %}
               <a class="dropdown-item" href="#">Mes favoris</a>
             {% endif %}

@@ -37,6 +37,11 @@ Then move in.
   php bin/console doctrine:migrations:migrate
 ```
 
+* Load data fixtures
+```
+  php bin/console doctrine:fixtures:load
+```
+
 * Start the server
 ```
   symfony server:start
@@ -57,3 +62,5 @@ You can access it on [https://127.0.0.1:8000](https://127.0.0.1:8000)
 ```
   php bin/console app:create-user email password --admin
 ```
+
+* Once you are logged in with an administrator user, you can access the `/ admin` route to administer the content.
