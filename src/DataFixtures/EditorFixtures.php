@@ -10,11 +10,11 @@ class EditorFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $editor1 = new editor();
+        $editor1 = new Editor();
         $editor1->setName('Gallimard');
         $editor1->setFoundationYear(1911);
 
-        $editor2 = new editor();
+        $editor2 = new Editor();
         $editor2->setName('Milan');
         $editor2->setFoundationYear(1980);
 

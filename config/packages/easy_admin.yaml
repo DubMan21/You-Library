@@ -5,8 +5,9 @@ easy_admin:
         menu:
             - { route: 'home', label: 'Back to website', icon: 'home' }
             - { entity: 'Editor', label: 'Editor', icon: 'newspaper' }
+            - { entity: 'Author', label: 'Author', icon: 'feather-alt' }
 
     entities:
         - App\Entity\Editor
-#        - App\Entity\Category
+        - App\Entity\Author
 #        - App\Entity\User
